@@ -1,0 +1,120 @@
+Uri: https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\ajax\libs\jquery\3.6.3\jquery.min.js
+Content Type: text/javascript
+
+Uri: https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\npm\bootstrap-icons@1.9.1\font\bootstrap-icons.css
+Content Type: text/css
+
+Uri: https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/fonts/bootstrap-icons.woff2?8d200481aa7f02a2d63a331fc782cfaf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\npm\bootstrap-icons@1.9.1\font\fonts\bootstrap-icons.woff2
+Content Type: font/woff2
+
+Uri: https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/fonts/bootstrap-icons.woff?8d200481aa7f02a2d63a331fc782cfaf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\npm\bootstrap-icons@1.9.1\font\fonts\bootstrap-icons.woff
+Content Type: font/woff
+
+Uri: https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\npm\bootstrap@4.5.3\dist\css\bootstrap.min.css
+Content Type: text/css
+
+Uri: https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\npm\bootstrap@4.5.3\dist\js\bootstrap.min.js
+Content Type: application/javascript
+
+Uri: https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\npm\popper.js@1.16.1\dist\umd\popper.min.js
+Content Type: application/javascript
+
+Uri: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\ajax\libs\font-awesome\6.0.0-beta2\css\all.min.css
+Content Type: text/css
+
+Uri: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/webfonts/fa-brands-400.ttf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\ajax\libs\font-awesome\6.0.0-beta2\webfonts\fa-brands-400.ttf
+Content Type: application/octet-stream
+
+Uri: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/webfonts/fa-brands-400.woff2
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\ajax\libs\font-awesome\6.0.0-beta2\webfonts\fa-brands-400.woff2
+Content Type: application/octet-stream
+
+Uri: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/webfonts/fa-regular-400.ttf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\ajax\libs\font-awesome\6.0.0-beta2\webfonts\fa-regular-400.ttf
+Content Type: application/octet-stream
+
+Uri: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/webfonts/fa-regular-400.woff2
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\ajax\libs\font-awesome\6.0.0-beta2\webfonts\fa-regular-400.woff2
+Content Type: application/octet-stream
+
+Uri: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/webfonts/fa-solid-900.ttf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\ajax\libs\font-awesome\6.0.0-beta2\webfonts\fa-solid-900.ttf
+Content Type: application/octet-stream
+
+Uri: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/webfonts/fa-solid-900.woff2
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\ajax\libs\font-awesome\6.0.0-beta2\webfonts\fa-solid-900.woff2
+Content Type: application/octet-stream
+
+Uri: https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\ajax\libs\OwlCarousel2\2.3.4\assets\owl.carousel.min.css
+Content Type: text/css
+
+Uri: https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\ajax\libs\OwlCarousel2\2.3.4\assets\owl.theme.default.min.css
+Content Type: text/css
+
+Uri: https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.video.play.png
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\ajax\libs\OwlCarousel2\2.3.4\assets\owl.video.play.png
+Content Type: image/png
+
+Uri: https://code.jquery.com/jquery-3.5.1.slim.min.js
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\jquery-3.5.1.slim.min.js
+Content Type: application/javascript
+
+Uri: https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\css2
+Content Type: text/css
+
+Uri: https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51S7ABc9.ttf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\s\roboto\v30\KFOjCnqEu92Fr1Mu51S7ABc9.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TjARc9.ttf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\s\roboto\v30\KFOjCnqEu92Fr1Mu51TjARc9.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TzBhc9.ttf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\s\roboto\v30\KFOjCnqEu92Fr1Mu51TzBhc9.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/roboto/v30/KFOkCnqEu92Fr1Mu52xP.ttf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\s\roboto\v30\KFOkCnqEu92Fr1Mu52xP.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9vAw.ttf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\s\roboto\v30\KFOlCnqEu92Fr1MmEU9vAw.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5vAw.ttf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\s\roboto\v30\KFOlCnqEu92Fr1MmSU5vAw.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlvAw.ttf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\s\roboto\v30\KFOlCnqEu92Fr1MmWUlvAw.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Me5Q.ttf
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\s\roboto\v30\KFOmCnqEu92Fr1Me5Q.ttf
+Content Type: font/ttf
+
+Uri: https://rethink.terrawatt.co.in/
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\index.htm
+Content Type: text/html
+
+Uri: https://rethink.terrawatt.co.in/img/loading.gif
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\img\loading.gif
+Content Type: image/gif
+
+Uri: https://rethink.terrawatt.co.in/img/logo-icon.png
+File Name: C:\Downloaded Web Sites\rethink.terrawatt.co.in\img\logo-icon.png
+Content Type: image/png
+
