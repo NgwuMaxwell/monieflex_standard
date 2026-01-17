@@ -98,7 +98,7 @@
             
             
                                     <div class="product">
-                <div class="img-top"><img src="https://cdn.discordapp.com/attachments/1078424833664237641/1168873833688735754/20231031_172650.png?ex=65535996&is=6540e496&hm=44ca169da75a22844c5b41c20887d978137ebb8f7e6c5734f936fab19221098b&" class="w-100"></div>
+                <div class="img-top"><img src="{{ getImage('assets/images/plan/' . $plan->image) }}" class="w-100" style="object-fit: cover; height: 200px;"></div>
                 <div class="txt-body">
                     <div class="title">{{ __($plan->name) }}</div>
                     <div class="txt-row">

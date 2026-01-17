@@ -178,6 +178,17 @@ class ManagePtcController extends Controller
     }
 
 
+    public function delete($id)
+    {
+        $ptc = Ptc::findOrFail($id);
+        if($ptc->ads_type == 2 && $ptc->ads_body){
+            fileManager()->removeFile(getFilePath('ptc') . '/' . $ptc->ads_body);
+        }
+        $ptc->delete();
+        $notify[] = ['success', 'PTC ad deleted successfully.'];
+        return back()->withNotify($notify);
+    }
+
     public function validation($request, $rules = [])
     {
         $globalRules = [

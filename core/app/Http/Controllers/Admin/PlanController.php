@@ -25,6 +25,7 @@ class PlanController extends Controller
             'daily_limit' => 'required|numeric|min:1',
             'ref_level' => 'required|numeric|min:0',
             'validity' => 'required|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if($request->id == 0){
@@ -38,9 +39,25 @@ class PlanController extends Controller
         $plan->ref_level = $request->ref_level;
         $plan->validity = $request->validity;
         $plan->status = isset($request->status) ? 1:0;
+
+        if($request->hasFile('image')){
+            $plan->image = fileUploader($request->image, 'assets/images/plan', null, @$plan->image);
+        }
+
         $plan->save();
 
         $notify[] = ['success', 'Plan has been Updated Successfully.'];
+        return back()->withNotify($notify);
+    }
+
+    public function delete($id)
+    {
+        $plan = Plan::findOrFail($id);
+        if($plan->image){
+            fileManager()->removeFile('assets/images/plan/' . $plan->image);
+        }
+        $plan->delete();
+        $notify[] = ['success', 'Plan deleted successfully.'];
         return back()->withNotify($notify);
     }
 }

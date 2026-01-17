@@ -36,9 +36,12 @@
                                 @endif
                             </td>
                             <td data-label="@lang('Action')">
-                                <button class="btn btn-outline--primary btn-sm planBtn" data-id="{{ $plan->id }}" data-name="{{ $plan->name }}" data-price="{{ getAmount($plan->price) }}" data-daily_limit="{{ $plan->daily_limit }}" data-validity="{{ $plan->validity }}" data-status="{{ $plan->status }}" data-ref_level="{{ $plan->ref_level}}" data-act="Edit">
+                                <button class="btn btn-outline--primary btn-sm planBtn" data-id="{{ $plan->id }}" data-name="{{ $plan->name }}" data-price="{{ getAmount($plan->price) }}" data-daily_limit="{{ $plan->daily_limit }}" data-validity="{{ $plan->validity }}" data-status="{{ $plan->status }}" data-ref_level="{{ $plan->ref_level}}" data-image="{{ $plan->image }}" data-act="Edit">
                                     <i class="la la-pencil"></i> @lang('Edit')
                                 </button>
+                                <a class="btn btn-outline--danger btn-sm" href="{{ route('admin.plan.delete', $plan->id) }}" onclick="return confirm('Are you sure you want to delete this plan?')">
+                                    <i class="la la-trash"></i> @lang('Delete')
+                                </a>
                             </td>
                         </tr>
                         @empty
@@ -63,7 +66,7 @@
                 <i class="las la-times"></i>
             </button>
             </div>
-            <form action="{{ route('admin.plan.save') }}" method="post">
+            <form action="{{ route('admin.plan.save') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id">
                 <div class="modal-body">
@@ -103,6 +106,12 @@
                         <label for="status">@lang('Status')</label>
                         <input type="checkbox" data-width="100%" data-height="50" data-onstyle="-success" data-offstyle="-danger" data-bs-toggle="toggle" data-on="@lang('Enable')" data-off="@lang('Disable')" name="status">
                     </div>
+                    <div class="form-group">
+                        <label for="image">@lang('Image')</label>
+                        <input type="file" class="form-control" name="image" accept="image/*">
+                        <small>@lang('Supported formats: jpeg, png, jpg, gif. Max size: 2MB')</small>
+                        <img class="img-thumbnail mt-2 current-image" width="100" style="display:none">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn--primary w-100">@lang('Submit')</button>
@@ -133,6 +142,13 @@
             modal.find('select[name=ref_level]').val($(this).data('ref_level'));
             if($(this).data('id') == 0){
                 modal.find('form')[0].reset();
+                modal.find('.current-image').hide();
+            } else {
+                if($(this).data('image')){
+                    modal.find('.current-image').attr('src', '/assets/images/plan/' + $(this).data('image')).show();
+                } else {
+                    modal.find('.current-image').hide();
+                }
             }
             modal.modal('show');
         });
