@@ -21,8 +21,20 @@
                                 @forelse($ptcviews as $data)
                                 <tr>
                                     <td data-label="@lang('Date')">{{ \Carbon\Carbon::parse($data->view_date)->format('Y-m-d') }}</td>
-                                    <td data-label="@lang('PTC Ad')"> <a href="{{route('admin.ptc.edit',$data->ptc->id)}}">{{strLimit($data->ptc->title,20)}}</a></td>
-                                    <td data-label="@lang('User')"><a href="{{ route('admin.users.detail', $data->user->id) }}">{{ $data->user->username }}</a></td>
+                                    <td data-label="@lang('PTC Ad')">
+                                        @if($data->ptc)
+                                            <a href="{{route('admin.ptc.edit',$data->ptc->id)}}">{{strLimit($data->ptc->title,20)}}</a>
+                                        @else
+                                            N/A
+                                        @endif
+                                    </td>
+                                    <td data-label="@lang('User')">
+                                        @if($data->user)
+                                            <a href="{{ route('admin.users.detail', $data->user->id) }}">{{ $data->user->username }}</a>
+                                        @else
+                                            N/A
+                                        @endif
+                                    </td>
                                     <td class="font-weight-bold" data-label="Amount">{{ getAmount($data->amount)}} {{$general->cur_text}} </td>
                                 </tr>
                                 @empty

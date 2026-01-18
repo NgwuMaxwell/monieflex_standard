@@ -5,7 +5,7 @@
             <a href="{{route('admin.dashboard')}}" class="sidebar__main-logo"><img src="{{getImage(getFilePath('logoIcon') .'/logo.png')}}" alt="@lang('image')"></a>
         </div>
 
-        <div class="sidebar__menu-wrapper" id="sidebar__menuWrapper">
+        <div class="sidebar__menu-wrapper" id="sidebar__menuWrapper" style="scroll-behavior: auto !important; overflow-anchor: none !important; transform: translateZ(0) !important; will-change: auto !important; position: relative !important;">
             <ul class="sidebar__menu">
                 <li class="sidebar-menu-item {{menuActive('admin.dashboard')}}">
                     <a href="{{route('admin.dashboard')}}" class="nav-link ">
@@ -15,26 +15,26 @@
                 </li>
 
 
-                <li class="sidebar-menu-item {{menuActive('admin.referrals.*')}}">
-                    <a href="frontend/frontend-sections/banner" class="nav-link ">
+                <li class="sidebar-menu-item {{ request()->routeIs('admin.frontend.sections') && request()->route('key') === 'banner' ? 'active' : '' }}">
+                    <a href="{{ route('admin.frontend.sections', 'banner') }}" class="nav-link ">
                         <i class="menu-icon las la-link"></i>
                         <span class="menu-title">@lang('Banner')</span>
                     </a>
                 </li>
 
 
-                <li class="sidebar-menu-item {{menuActive('admin.referrals.*')}}">
-                    <a href="frontend/frontend-sections/kyc_info" class="nav-link ">
+                <li class="sidebar-menu-item {{ request()->routeIs('admin.frontend.sections') && request()->route('key') === 'kyc_info' ? 'active' : '' }}">
+                    <a href="{{ route('admin.frontend.sections', 'kyc_info') }}" class="nav-link ">
                         <i class="menu-icon las la-link"></i>
-                        <span class="menu-title">@lang('Anoucment')</span>
+                        <span class="menu-title">@lang('Announcement')</span>
                     </a>
                 </li>
 
 
-                <li class="sidebar-menu-item {{menuActive('admin.referrals.*')}}">
-                    <a href="frontend/frontend-sections/blog" class="nav-link ">
+                <li class="sidebar-menu-item {{ request()->routeIs('admin.frontend.sections') && request()->route('key') === 'blog' ? 'active' : '' }}">
+                    <a href="{{ route('admin.frontend.sections', 'blog') }}" class="nav-link ">
                         <i class="menu-icon las la-link"></i>
-                        <span class="menu-title">@lang('news post')</span>
+                        <span class="menu-title">@lang('Post News')</span>
                     </a>
                 </li>
 
@@ -643,10 +643,139 @@
 
 @push('script')
     <script>
-        if($('li').hasClass('active')){
-            $('#sidebar__menuWrapper').animate({
-                scrollTop: eval($(".active").offset().top - 320)
-            },500);
-        }
+        (function() {
+            'use strict';
+            
+            var sidebar = document.getElementById('sidebar__menuWrapper');
+            var SCROLL_KEY = 'admin_sidebar_scroll_position';
+            var isRestoring = false;
+            var restorationComplete = false;
+            
+            if (!sidebar) return;
+            
+            // Disable scroll restoration from browser
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            
+            // Save scroll position
+            function saveScrollPosition() {
+                if (sidebar && !isRestoring) {
+                    sessionStorage.setItem(SCROLL_KEY, sidebar.scrollTop);
+                }
+            }
+            
+            // Restore scroll position aggressively
+            function restoreScrollPosition() {
+                var savedPosition = sessionStorage.getItem(SCROLL_KEY);
+                if (savedPosition !== null && sidebar) {
+                    isRestoring = true;
+                    var targetScroll = parseInt(savedPosition);
+                    sidebar.scrollTop = targetScroll;
+                    
+                    // Force scroll position multiple times to overcome browser behavior
+                    setTimeout(function() {
+                        sidebar.scrollTop = targetScroll;
+                    }, 0);
+                    
+                    setTimeout(function() {
+                        sidebar.scrollTop = targetScroll;
+                    }, 10);
+                    
+                    setTimeout(function() {
+                        sidebar.scrollTop = targetScroll;
+                        isRestoring = false;
+                        restorationComplete = true;
+                    }, 50);
+                    
+                    setTimeout(function() {
+                        sidebar.scrollTop = targetScroll;
+                    }, 100);
+                    
+                    setTimeout(function() {
+                        sidebar.scrollTop = targetScroll;
+                    }, 200);
+                }
+            }
+            
+            // Prevent scrollIntoView on active elements
+            var originalScrollIntoView = Element.prototype.scrollIntoView;
+            Element.prototype.scrollIntoView = function() {
+                // Check if this is being called on a sidebar element
+                if (sidebar && sidebar.contains(this)) {
+                    // Ignore scrollIntoView calls for sidebar elements
+                    return;
+                }
+                // Allow scrollIntoView for other elements
+                originalScrollIntoView.apply(this, arguments);
+            };
+            
+            // Immediately restore position
+            restoreScrollPosition();
+            
+            // Keep restoring until DOM is ready
+            var earlyInterval = setInterval(function() {
+                if (!restorationComplete) {
+                    restoreScrollPosition();
+                }
+            }, 5);
+            
+            // Stop early restoration after 300ms
+            setTimeout(function() {
+                clearInterval(earlyInterval);
+            }, 300);
+            
+            // Restore on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    restoreScrollPosition();
+                });
+            }
+            
+            // Final restoration after page load
+            window.addEventListener('load', function() {
+                restoreScrollPosition();
+                
+                // Keep checking for 500ms after load
+                var postLoadInterval = setInterval(function() {
+                    var savedPosition = sessionStorage.getItem(SCROLL_KEY);
+                    if (savedPosition !== null && sidebar.scrollTop !== parseInt(savedPosition)) {
+                        sidebar.scrollTop = parseInt(savedPosition);
+                    }
+                }, 10);
+                
+                setTimeout(function() {
+                    clearInterval(postLoadInterval);
+                }, 500);
+            });
+            
+            // Save position before navigation
+            window.addEventListener('beforeunload', saveScrollPosition);
+            
+            // Save position on scroll (but not during restoration)
+            sidebar.addEventListener('scroll', function() {
+                if (!isRestoring) {
+                    saveScrollPosition();
+                }
+            });
+            
+            // Save position on all sidebar link clicks
+            sidebar.addEventListener('click', function(e) {
+                var target = e.target.closest('a');
+                if (target && target.href && !target.href.includes('javascript:')) {
+                    saveScrollPosition();
+                }
+            });
+            
+            // Prevent active element from auto-scrolling
+            var activeElements = sidebar.querySelectorAll('.active, .sidebar-menu-item.active');
+            activeElements.forEach(function(element) {
+                element.addEventListener('focus', function(e) {
+                    e.preventDefault();
+                    this.blur();
+                });
+            });
+            
+        })();
     </script>
 @endpush
