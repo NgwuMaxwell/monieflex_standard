@@ -68,7 +68,10 @@ class AutomaticGatewayController extends Controller
         $pageTitle = 'Update Gateway';
 
         $supportedCurrencies = collect($gateway->supported_currencies)->except($gateway->currencies->pluck('currency'));
-        $parameters = collect(json_decode($gateway->gateway_parameters));
+        
+        // gateway_parameters is already cast to object by the model, no need to json_decode
+        $parameters = collect($gateway->gateway_parameters);
+        
         $globalParameters = null;
         $hasCurrencies = false;
         $currencyIndex = 1;
