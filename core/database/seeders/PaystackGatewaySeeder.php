@@ -24,24 +24,25 @@ class PaystackGatewaySeeder extends Seeder
         $gateway->alias = 'paystack';
         $gateway->image = null;
         $gateway->status = 0; // Disabled by default
-        $gateway->gateway_parameters = json_encode([
-            'public_key' => (object)[
+        // Don't use json_encode - model casts will handle it
+        $gateway->gateway_parameters = [
+            'public_key' => [
                 'title' => 'Public Key',
                 'global' => true,
                 'value' => 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
             ],
-            'secret_key' => (object)[
+            'secret_key' => [
                 'title' => 'Secret Key',
                 'global' => true,
                 'value' => 'sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
             ]
-        ]);
-        $gateway->supported_currencies = json_encode((object)['NGN' => 'NGN', 'USD' => 'USD', 'GHS' => 'GHS', 'ZAR' => 'ZAR', 'KES' => 'KES']);
+        ];
+        $gateway->supported_currencies = ['NGN' => 'NGN', 'USD' => 'USD', 'GHS' => 'GHS', 'ZAR' => 'ZAR', 'KES' => 'KES'];
         $gateway->crypto = 0;
-        $gateway->extra = json_encode([
+        $gateway->extra = [
             'callback_url' => route('user.deposit.confirm'),
             'webhook_url' => url('/') . '/api/paystack/webhook'
-        ]);
+        ];
         $gateway->description = 'Paystack is a Nigerian payment gateway that allows businesses to accept payments from customers via credit card, debit card, and bank account. It supports multiple African currencies.';
         $gateway->save();
 
