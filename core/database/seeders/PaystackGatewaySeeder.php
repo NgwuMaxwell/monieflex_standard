@@ -11,7 +11,7 @@ class PaystackGatewaySeeder extends Seeder
     {
         // Check if Paystack already exists
         $exists = Gateway::where('alias', 'paystack')->exists();
-        
+
         if ($exists) {
             $this->command->info('Paystack gateway already exists.');
             return;
@@ -42,7 +42,7 @@ class PaystackGatewaySeeder extends Seeder
         $gateway->extra = (object)[
             'callback_url' => (object)[
                 'title' => 'Callback URL',
-                'value' => 'user.deposit.confirm'
+                'value' => url('/') . '/user/deposit/confirm'
             ],
             'webhook_url' => (object)[
                 'title' => 'Webhook URL',
