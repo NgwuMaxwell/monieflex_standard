@@ -36,7 +36,7 @@ class PaystackGatewaySeeder extends Seeder
                 'value' => 'sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
             ]
         ]);
-        $gateway->supported_currencies = json_encode(['NGN', 'USD', 'GHS', 'ZAR', 'KES']);
+        $gateway->supported_currencies = json_encode((object)['NGN' => 'NGN', 'USD' => 'USD', 'GHS' => 'GHS', 'ZAR' => 'ZAR', 'KES' => 'KES']);
         $gateway->crypto = 0;
         $gateway->extra = json_encode([
             'callback_url' => route('user.deposit.confirm'),
