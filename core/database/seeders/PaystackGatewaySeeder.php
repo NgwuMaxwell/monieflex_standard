@@ -25,12 +25,12 @@ class PaystackGatewaySeeder extends Seeder
         $gateway->image = null;
         $gateway->status = 0; // Disabled by default
         $gateway->gateway_parameters = json_encode([
-            [
+            'public_key' => (object)[
                 'title' => 'Public Key',
                 'global' => true,
                 'value' => 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
             ],
-            [
+            'secret_key' => (object)[
                 'title' => 'Secret Key',
                 'global' => true,
                 'value' => 'sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
