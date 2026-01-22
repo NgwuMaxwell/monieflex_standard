@@ -325,12 +325,15 @@ class UserController extends Controller
     {
         $pageTitle = "My Plans";
         $user = auth()->user();
-        
+
         // Get all plan subscription transactions for the user
         $planTransactions = Transaction::where('user_id', $user->id)
             ->where('remark', 'subscribe_plan')
             ->orderBy('created_at', 'desc')
             ->paginate(getPaginate());
+
+        // Keep the original paginated collection for pagination methods
+        $originalPlanHistory = $planTransactions;
 
         // Process the plan history with detailed information
         $planHistory = $planTransactions->map(function ($transaction) use ($user) {
@@ -381,8 +384,8 @@ class UserController extends Controller
                 'status_class' => $statusClass,
             ];
         });
-        
-        return view($this->activeTemplate . 'user.my_plans', compact('pageTitle', 'planHistory'));
+
+        return view($this->activeTemplate . 'user.my_plans', compact('pageTitle', 'planHistory', 'originalPlanHistory'));
     }
 
     public function transfer()

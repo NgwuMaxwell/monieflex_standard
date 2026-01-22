@@ -123,9 +123,9 @@
                     </div>
                 @endforeach
                 
-                @if($planHistory->hasPages())
+                @if($originalPlanHistory->hasPages())
                     <div class="mt-4">
-                        {{ paginateLinks($planHistory) }}
+                        {{ paginateLinks($originalPlanHistory) }}
                     </div>
                 @endif
             @else
