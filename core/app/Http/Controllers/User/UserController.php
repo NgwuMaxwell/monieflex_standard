@@ -349,10 +349,12 @@ class UserController extends Controller
                 // If plan not found, use default values
                 $validity = 30;
                 $dailyLimit = 0;
+                $roiPercentage = 0;
                 $expectedTotalProfits = 0;
             } else {
                 $validity = $plan->validity;
                 $dailyLimit = $plan->daily_limit;
+                $roiPercentage = $plan->roi_percentage;
                 // Calculate expected total profits
                 $expectedTotalProfits = ($plan->price * $plan->roi_percentage) / 100;
             }
@@ -377,6 +379,7 @@ class UserController extends Controller
                 'expire_date' => $expireDate,
                 'validity' => $validity,
                 'daily_limit' => $dailyLimit,
+                'roi_percentage' => $roiPercentage,
                 'expected_total_profits' => $expectedTotalProfits,
                 'trx' => $transaction->trx,
                 'is_active' => $isActive,

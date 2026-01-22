@@ -116,6 +116,10 @@
                                 <span class="value">{{ $history->trx }}</span>
                             </div>
                             <div class="plan-detail-row">
+                                <span class="label">ROI Percentage</span>
+                                <span class="value">{{ $history->roi_percentage }}%</span>
+                            </div>
+                            <div class="plan-detail-row">
                                 <span class="label">Expected Total Profits</span>
                                 <span class="value price">{{ showAmount($history->expected_total_profits) }} {{ $general->cur_text }}</span>
                             </div>
