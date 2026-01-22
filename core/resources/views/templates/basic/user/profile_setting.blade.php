@@ -201,14 +201,10 @@ $pageTitle = 'wallet';
                             <span>{{ $general->cur_text }}</span></p>
                         <h6>Wallet Balance</h6>
                     </div>
-                    <div class="part-one">
+                    <div class="part-one profit-wallet-container" style="position: relative;">
                         <p>{{ number_format($user->profit_wallet, 2) }}<span>{{ $general->cur_text }}</span></p>
                         <h6>Profit Wallet</h6>
-                    </div>
-                </div>
-                <div class="detail-row">
-                    <div class="part-one d-block">
-                        <img src="{{asset ('assets/img/wallet-animation.gif')}}">
+                        <img src="{{asset ('assets/img/wallet-animation.gif')}}" style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); width: 40px; height: 40px;">
                     </div>
                 </div>
                 <hr></hr>
