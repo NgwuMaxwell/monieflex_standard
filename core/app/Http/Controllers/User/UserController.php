@@ -337,24 +337,27 @@ class UserController extends Controller
             // Extract plan name from transaction details
             preg_match('/Subscribe\s+(.+?)\s+Plan/', $transaction->details, $matches);
             $planName = $matches[1] ?? 'Plan';
-            
+
             // Get plan details from the transaction time
             // We need to find the plan by its name
             $plan = Plan::where('name', $planName)->first();
-            
+
             if (!$plan) {
                 // If plan not found, use default values
                 $validity = 30;
                 $dailyLimit = 0;
+                $expectedTotalProfits = 0;
             } else {
                 $validity = $plan->validity;
                 $dailyLimit = $plan->daily_limit;
+                // Calculate expected total profits
+                $expectedTotalProfits = ($plan->price * $plan->roi_percentage) / 100;
             }
-            
+
             // Calculate expiry date based on purchase date
             $expireDate = \Carbon\Carbon::parse($transaction->created_at)->addDays($validity);
             $isActive = now() < $expireDate;
-            
+
             // Determine status
             if ($isActive) {
                 $statusText = 'Active';
@@ -363,7 +366,7 @@ class UserController extends Controller
                 $statusText = 'Completed';
                 $statusClass = 'completed';
             }
-            
+
             return (object) [
                 'plan_name' => $planName,
                 'amount' => $transaction->amount,
@@ -371,6 +374,7 @@ class UserController extends Controller
                 'expire_date' => $expireDate,
                 'validity' => $validity,
                 'daily_limit' => $dailyLimit,
+                'expected_total_profits' => $expectedTotalProfits,
                 'trx' => $transaction->trx,
                 'is_active' => $isActive,
                 'status_text' => $statusText,
@@ -378,46 +382,8 @@ class UserController extends Controller
             ];
         });
         
-        // Wrap in paginator manually to maintain pagination
-        $planHistory = $planTransactions;
-        $planHistory->setCollection($planHistory->map(function ($transaction) use ($user) {
-            preg_match('/Subscribe\s+(.+?)\s+Plan/', $transaction->details, $matches);
-            $planName = $matches[1] ?? 'Plan';
-            
-            $plan = Plan::where('name', $planName)->first();
-            
-            if (!$plan) {
-                $validity = 30;
-                $dailyLimit = 0;
-            } else {
-                $validity = $plan->validity;
-                $dailyLimit = $plan->daily_limit;
-            }
-            
-            $expireDate = \Carbon\Carbon::parse($transaction->created_at)->addDays($validity);
-            $isActive = now() < $expireDate;
-            
-            if ($isActive) {
-                $statusText = 'Active';
-                $statusClass = 'active';
-            } else {
-                $statusText = 'Completed';
-                $statusClass = 'completed';
-            }
-            
-            return (object) [
-                'plan_name' => $planName,
-                'amount' => $transaction->amount,
-                'created_at' => $transaction->created_at,
-                'expire_date' => $expireDate,
-                'validity' => $validity,
-                'daily_limit' => $dailyLimit,
-                'trx' => $transaction->trx,
-                'is_active' => $isActive,
-                'status_text' => $statusText,
-                'status_class' => $statusClass,
-            ];
-        }));
+        // Set the processed collection to maintain pagination
+        $planHistory->setCollection($planHistory);
 
         return view($this->activeTemplate . 'user.my_plans', compact('pageTitle', 'planHistory'));
     }

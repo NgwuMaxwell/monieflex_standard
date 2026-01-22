@@ -115,6 +115,10 @@
                                 <span class="label">Transaction ID</span>
                                 <span class="value">{{ $history->trx }}</span>
                             </div>
+                            <div class="plan-detail-row">
+                                <span class="label">Expected Total Profits</span>
+                                <span class="value price">{{ showAmount($history->expected_total_profits) }} {{ $general->cur_text }}</span>
+                            </div>
                         </div>
                     </div>
                 @endforeach
