@@ -64,9 +64,9 @@
       
     </center>
 
-     @php
+@php
   $authUser = Auth::user();
-  $balance = number_format($authUser->balance, 0, '.', '');
+  $balance = number_format($authUser->profit_wallet, 0, '.', '');
 @endphp
 
 
@@ -124,7 +124,7 @@
                     <a class="nav-link active" id="nav-one-tab" data-toggle="tab" href="#nav-one" role="tab" aria-controls="nav-one" aria-selected="true">Cash Withdraw</a>
                                        
                 </div>
-            </nav> <a class="nav-link active" >The Minimum Withdraw is 100 {{__($general->cur_text)}}  </a>
+            </nav> <a class="nav-link active" >The Minimum Withdraw is {{ $withdrawMethod->first()->min_limit ?? 100 }} {{__($general->cur_text)}}  </a>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-one" role="tabpanel" aria-labelledby="nav-one-tab">
                     <form class="login-form" action="{{ route('user.withdraw.money') }}" method="post">

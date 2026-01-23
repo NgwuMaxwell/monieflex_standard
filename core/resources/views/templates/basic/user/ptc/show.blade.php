@@ -238,10 +238,28 @@
             <div class="adBody">
                 @php echo $ptc->ads_body @endphp
             </div>
+        @elseif($ptc->ads_type == 5)
+            <div class="d-flex justify-content-center align-items-center" style="position: absolute; top: 86px; left: 0; right: 0; bottom: 0; padding: 20px; box-sizing: border-box;">
+                <video controls autoplay muted style="max-width: 100%; max-height: 100%;">
+                    <source src="{{ url('assets/images/ptc/' . $ptc->ads_body) }}" type="video/mp4">
+                    <source src="{{ url('assets/images/ptc/' . $ptc->ads_body) }}" type="video/avi">
+                    <source src="{{ url('assets/images/ptc/' . $ptc->ads_body) }}" type="video/mov">
+                    <source src="{{ url('assets/images/ptc/' . $ptc->ads_body) }}" type="video/wmv">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         @else
             <div class="d-flex justify-content-center">
                 <div class="iframe-container">
-                    <iframe src="{{ $ptc->ads_body }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="{{ $ptc->ads_body }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation" loading="lazy"></iframe>
+                    @if(config('app.debug'))
+                        <div class="mt-2 p-2 bg-light text-center">
+                            <small class="text-muted">Debug: YouTube URL: {{ $ptc->ads_body }}</small>
+                        </div>
+                    @endif
+                </div>
+                <div class="mt-3 text-center">
+                    <small class="text-muted">If video doesn't load, try refreshing the page or check your browser settings.</small>
                 </div>
             </div>
         @endif

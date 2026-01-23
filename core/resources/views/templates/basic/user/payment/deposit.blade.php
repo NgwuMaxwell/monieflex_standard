@@ -36,13 +36,15 @@
     .title { font-size: 16px; font-weight: 700; line-height: 21px; color: #151515; margin: 15px 0; }
 
     .amt-sets { width: calc(100% + 15px); margin: 0 -7.5px; display: flex; flex-direction: row; align-items: center; justify-content: start; flex-wrap: wrap; }
-    .amt-sets button.btn-amt { width: calc(33.333% - 15px); height: 105px; margin: 0 7.5px 10px; background-color: #f1f1fe; border: 0; border-radius: 10px; outline: 0; box-shadow: none; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
-    .amt-sets button.btn-amt .btn-tag { width: fit-content; height: 18px; background-color: #ffa200; border-radius: 10px 10px 10px 0; padding: 3px 10px; font-size: 12px; line-height: 12px; font-weight: 400; color: #fff; position: absolute; top: -5px; right: -7px; }
-    .amt-sets button.btn-amt .icon {width: 25px; height: 25px; background-color: #ffa200; border-radius: 100%; font-size: 14px; font-weight: 400; color: #fff; line-height: 25px; text-align: center; }
-    .amt-sets button.btn-amt img { width: 25px; height: 25px; }
-    .amt-sets button.btn-amt span { font-size: 18px; font-weight: 700; line-height: 24px; color: #151515; margin-top: 10px; }
-    .amt-sets button.btn-amt.active { background-color: #3244a8; }
+    .amt-sets button.btn-amt { width: calc(33.333% - 15px); height: 110px; margin: 0 7.5px 15px; background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%); border: 2px solid #e8ecf4; border-radius: 15px; outline: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; transition: all 0.3s ease; cursor: pointer; }
+    .amt-sets button.btn-amt:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); border-color: #3244a8; }
+    .amt-sets button.btn-amt .btn-tag { width: fit-content; height: 20px; background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); border-radius: 12px 12px 12px 0; padding: 4px 12px; font-size: 11px; line-height: 12px; font-weight: 600; color: #fff; position: absolute; top: -8px; right: -8px; box-shadow: 0 2px 8px rgba(255,107,53,0.3); }
+    .amt-sets button.btn-amt .icon {width: 32px; height: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 4px; font-size: 12px; font-weight: 600; color: #fff; line-height: 20px; text-align: center; box-shadow: 0 3px 10px rgba(102,126,234,0.3); }
+    .amt-sets button.btn-amt img { width: 28px; height: 28px; }
+    .amt-sets button.btn-amt span { font-size: 16px; font-weight: 700; line-height: 20px; color: #2d3748; margin-top: 8px; }
+    .amt-sets button.btn-amt.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-color: #667eea; box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
     .amt-sets button.btn-amt.active span { color: #fff; }
+    .amt-sets button.btn-amt.active .icon { background: rgba(255,255,255,0.2); }
 
     form.login-form { margin: 0; }
     form.login-form .form-group { width: 100%; height: 45px; background-color: #f1f1fe; border-radius: 7px; margin: 10px 0; }
@@ -188,29 +190,29 @@
                         <input type="hidden" name="selected_channel" class="selected_channel" value="">
                         <div class="title">Amount</div>
                         <div class="amt-sets">
-                            <button type="button" type="button" onclick="amountset('500')" class="btn-amt active">
+                            <button type="button" type="button" onclick="amountset('5000')" class="btn-amt active">
                                 <div class="icon">{{__($general->cur_text)}}</div>
-                                <span>500.00</span>
+                                <span>5,000</span>
                             </button>
-                            <button type="button" type="button" onclick="amountset('1200')" class="btn-amt">
+                            <button type="button" type="button" onclick="amountset('10000')" class="btn-amt">
                                 <div class="icon">{{__($general->cur_text)}}</div>
-                                <span>1200.00</span>
+                                <span>10,000</span>
                             </button>
-                            <button type="button" type="button" onclick="amountset('3000')" class="btn-amt">
+                            <button type="button" type="button" onclick="amountset('20000')" class="btn-amt">
                                 <div class="icon">{{__($general->cur_text)}}</div>
-                                <span>3000.00</span>
+                                <span>20,000</span>
                             </button>
-                            <button type="button" type="button" onclick="amountset('5000')" class="btn-amt">
+                            <button type="button" type="button" onclick="amountset('50000')" class="btn-amt">
                                 <div class="icon">{{__($general->cur_text)}}</div>
-                                <span>5000.00</span>
+                                <span>50,000</span>
                             </button>
-                            <button type="button" type="button" onclick="amountset('16000')" class="btn-amt">
+                            <button type="button" type="button" onclick="amountset('100000')" class="btn-amt">
                                 <div class="icon">{{__($general->cur_text)}}</div>
-                                <span>16000.00</span>
+                                <span>100,000</span>
                             </button>
-                            <button type="button" type="button" onclick="amountset('48000')" class="btn-amt">
+                            <button type="button" type="button" onclick="amountset('500000')" class="btn-amt">
                                 <div class="icon">{{__($general->cur_text)}}</div>
-                                <span>48000.00</span>
+                                <span>500,000</span>
                             </button>
                         </div>
                         <div class="form-group">

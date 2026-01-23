@@ -49,7 +49,13 @@ class PtcController extends Controller
 
         // Convert YouTube URL to embed format if necessary
         if ($ptc->ads_type == 4) {
+            $originalUrl = $ptc->ads_body;
             $ptc->ads_body = $this->convertToEmbedUrl($ptc->ads_body);
+            // Log for debugging
+            \Log::info('YouTube URL conversion', [
+                'original' => $originalUrl,
+                'converted' => $ptc->ads_body
+            ]);
         }
         if ($user->id == $ptc->user_id) {
             $notify[] = ['error','You couldn\'t view your own advertisement'];
@@ -310,6 +316,9 @@ class PtcController extends Controller
 
     private function convertToEmbedUrl($url)
     {
+        // Force HTTPS
+        $url = str_replace('http://', 'https://', $url);
+
         // If already an embed URL, ensure it has parameters
         if (strpos($url, 'youtube.com/embed/') !== false || strpos($url, 'youtube-nocookie.com/embed/') !== false) {
             $parsedUrl = parse_url($url);

@@ -46,12 +46,14 @@
         .container {
             width: 100%;
             max-width: 991px;
-            padding: 44px 15px 15px;
+            padding: 20px 15px 120px;
         }
 
-        .header { width: 100%; height: 40px; background: #fff; line-height: 40px; font-size: 16px; font-weight: 600; color: #121212; text-align: center; position: fixed; top: 0; left: 0; z-index: 10; }
-    .header i { font-size: 20px; color: #121212; position: absolute; left: 12px; top: 0px; }
-    .header i.right { right: 12px; left: auto; }
+    .header { width: 100%; max-width: 991px; height: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-size: 18px; font-weight: 700; color: #ffffff; text-align: center; line-height: 60px; position: fixed; transform: translateX(-50%); left: 50%; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; }
+    .header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+    .header .back-btn { width: 30px; height: 30px; position: absolute; left: 15px; top: 15px; cursor: pointer; }
+    .header .back-btn i { color: #fff; font-size: 24px; }
+    .header span { position: relative; z-index: 2; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
 
         .top-block {
             width: 100%;
@@ -247,8 +249,7 @@
 
 <h1>‎ ‎ ‎ ‎ ‎ ‎  ‎ </h1>
 
-<div class="content-body">
-    <div class="container-fluid">
+<div class="container">
         <div class="row">
             <!-- Code Start -->
             <div class="row">
@@ -256,7 +257,7 @@
                     <div class="card">
                         <div class="card-body">
                             
-                             <button   onclick="window.location.href='{{route ('user.home')}}'"  class="btn btn-primary btn-lg btn-block" >Back now</button>
+
                             
                             
                             
@@ -277,17 +278,13 @@
                 </div>
             </div>
    
-    <div class="container pt-0">
-        <div class="header">
-            <a href="javascript:void(0)" onclick="window.location.href=''"><i class="bi bi-chevron-left"></i></a>
-            Team
-            
-        </div>
+    <div class="header">
+        <a href="{{ route('user.profile.setting') }}" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <span>My Team</span>
+    </div>
 
-    <br/>
-    <br/>
-    
-    
 @php
     use App\Models\Transaction;
     $authUserId = Auth::id();
@@ -296,36 +293,33 @@
                                     ->sum('amount');
     $formattedReferralCommission = number_format($referralCommission, 0, '.', '');
 @endphp
-    
-        <div class="top-block">
-            <div class="flex-area">
-                <div class="part-two">
-                    <p><b>     {{ $userCount }}</b></p>
-                    <p><b>Team</b></p>
-                </div>
-                <div class="part-two">
-                    <p><b>{{ $referralCommission }}</b></p>
-                    <p><b>Team Earning</b></p>
-                </div>
+
+    <div class="top-block">
+        <div class="flex-area">
+            <div class="part-two">
+                <p><b>     {{ $userCount }}</b></p>
+                <p><b>Team</b></p>
             </div>
-         
+            <div class="part-two">
+                <p><b>{{ $referralCommission }}</b></p>
+                <p><b>Team Earning</b></p>
             </div>
         </div>
+    </div>
 
-        <nav>
-            <div class="nav nav-pills nav-justified" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-one-tab" data-toggle="tab" href="#nav-one" role="tab" aria-controls="nav-one" aria-selected="true">1level</a>
-                <a class="nav-item nav-link" id="nav-two-tab" data-toggle="tab" href="#nav-two" role="tab" aria-controls="nav-two" aria-selected="false">2level</a>
-                <a class="nav-item nav-link" id="nav-three-tab" data-toggle="tab" href="#nav-three" role="tab" aria-controls="nav-three" aria-selected="false">3level</a>
-            </div>
-        </nav>
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-one" role="tabpanel" aria-labelledby="nav-one-tab">
-                                                            </div>
-            <div class="tab-pane fade" id="nav-two" role="tabpanel" aria-labelledby="nav-two-tab">
-                            </div>
-            <div class="tab-pane fade" id="nav-three" role="tabpanel" aria-labelledby="nav-three-tab">
-                            </div>
+    <nav>
+        <div class="nav nav-pills nav-justified" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-one-tab" data-toggle="tab" href="#nav-one" role="tab" aria-controls="nav-one" aria-selected="true">1level</a>
+            <a class="nav-item nav-link" id="nav-two-tab" data-toggle="tab" href="#nav-two" role="tab" aria-controls="nav-two" aria-selected="false">2level</a>
+            <a class="nav-item nav-link" id="nav-three-tab" data-toggle="tab" href="#nav-three" role="tab" aria-controls="nav-three" aria-selected="false">3level</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-one" role="tabpanel" aria-labelledby="nav-one-tab">
+        </div>
+        <div class="tab-pane fade" id="nav-two" role="tabpanel" aria-labelledby="nav-two-tab">
+        </div>
+        <div class="tab-pane fade" id="nav-three" role="tabpanel" aria-labelledby="nav-three-tab">
         </div>
     </div>
 
@@ -400,4 +394,3 @@
 </script>
 
 @include('partials.notify')
-

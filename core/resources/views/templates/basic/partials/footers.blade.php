@@ -14,23 +14,23 @@
    <div class="footer-nav">
     <div class="footer-nav-bg"><img src="{{asset ('assets/img/footer-menubar.png')}}" class="w-100 h-100"></div>
     <div class="nav-set">
-        <div class="nav active" onclick="window.location.href='{{route ('user.home')}}'">
+        <div class="nav {{ request()->routeIs('user.home') ? 'active' : '' }}" onclick="window.location.href='{{route ('user.home')}}'">
             <img src="{{asset ('assets/img/icon-home.png')}}">
             <span>Home</span>
         </div>
-        <div class="nav " onclick="window.location.href='{{route ('plans')}}'">
+        <div class="nav {{ request()->routeIs('plans') ? 'active' : '' }}" onclick="window.location.href='{{route ('plans')}}'">
             <img src="{{asset ('assets/img/icon-rent.png')}}">
             <span>Plans</span>
         </div>
-        <div class="nav center" onclick="window.location.href='{{ route('user.referred') }}'">
+        <div class="nav center {{ request()->routeIs('user.referred') ? 'active' : '' }}" onclick="window.location.href='{{ route('user.referred') }}'">
             <div class="circle"><img src="{{asset ('assets/img/icon-share.png')}}"></div>
             <span>Share</span>
         </div>
-        <div class="nav " onclick="window.location.href='{{ route('user.ptc.index') }}'">
+        <div class="nav {{ request()->routeIs('user.ptc.index') ? 'active' : '' }}" onclick="window.location.href='{{ route('user.ptc.index') }}'">
             <img src="{{asset ('assets/img/icon-income.png')}}">
             <span>Task</span>
         </div>
-        <div class="nav " onclick="window.location.href='{{ route('user.profile.setting') }}'">
+        <div class="nav {{ request()->routeIs('user.profile.setting') ? 'active' : '' }}" onclick="window.location.href='{{ route('user.profile.setting') }}'">
             <img src="{{asset ('assets/img/icon-user.png')}}">
             <span>User</span>
         </div>

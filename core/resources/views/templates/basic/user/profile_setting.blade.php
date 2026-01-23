@@ -23,7 +23,9 @@
     @import  url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
     html, body { width: 100%; max-width: 991px; margin: 0 auto; height: 100%; background: #fff; font-family: 'Roboto', sans-serif; font-size: 15px; font-weight: 400; color: rgba(0,0,0,.9); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; text-shadow: rgba(0,0,0,.01) 0 0 1px; }
     .page { width: 100%; height: auto; background: #f8f8f8; background-size: 100% 100%; padding-top: 0px; position: relative; }
-    .header { width: 100%; max-width: 991px; height: 50px; padding: 0 15px; background: transparent; text-align: center; position: fixed; transform: translateX(-50%); left: 50%; top: 0; z-index: 100; transition: all 0.3s ease-in-out; }
+    .header { width: 100%; max-width: 991px; height: 50px; padding: 0 15px; background: transparent; text-align: center; position: fixed; transform: translateX(-50%); left: 50%; top: 0; z-index: 100; transition: all 0.3s ease-in-out; display: flex; align-items: center; justify-content: center; }
+    .header .back-btn { width: 30px; height: 30px; position: absolute; left: 15px; top: 10px; cursor: pointer; }
+    .header .back-btn i { color: #fff; font-size: 24px; }
     .header span { font-size: 16px; line-height: 50px; font-weight: 400; color: #fff; opacity: 0; transition: all 0.3s ease-in-out; }
     .header .right-icon { width: 25px; height: 25px; position: absolute; top: 12.5px; right: 10px; }
 
@@ -89,6 +91,9 @@
 
 <body>
     <div class="header" id="header">
+        <a href="{{ route('user.home') }}" class="back-btn">
+            <i class="bi bi-arrow-left"></i>
+        </a>
         <span id="head-txt">User</span>
         <div class="right-icon" onclick="window.location.href='{{ route('user.profile.complete') }}'"><img src="{{asset ('assets/img/icon-setting.png')}}" class="w-100 h-100"></div>
     </div>

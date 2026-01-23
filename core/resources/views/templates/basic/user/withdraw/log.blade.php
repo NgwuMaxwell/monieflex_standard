@@ -7,8 +7,11 @@
     @import  url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
     html, body { width: 100%; max-width: 991px; margin: 0 auto; height: 100%; background: #fff; font-family: 'Roboto', sans-serif; font-size: 15px; font-weight: 400; color: rgba(0,0,0,.9); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; text-shadow: rgba(0,0,0,.01) 0 0 1px; }
     .page { width: 100%; height: auto; background: #fff; background-size: 100% 100%; padding-top: 50px; position: relative; }
-    .header { width: 100%; max-width: 991px; height: 44px; background: #fff; font-size: 16px; line-height: 44px; font-weight: 600; color: #151515; text-align: center; position: fixed; transform: translateX(-50%); left: 50%; top: 0; z-index: 100; }
-    .header .left-arrow { font-size: 20px; position: absolute; left: 10px; top: 0; }
+    .header { width: 100%; max-width: 991px; height: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-size: 18px; font-weight: 700; color: #ffffff; text-align: center; line-height: 60px; position: fixed; transform: translateX(-50%); left: 50%; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; }
+    .header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+    .header .back-btn { width: 30px; height: 30px; position: absolute; left: 15px; top: 15px; cursor: pointer; }
+    .header .back-btn i { color: #fff; font-size: 24px; }
+    .header span { position: relative; z-index: 2; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
     
     .container { width: 100%; max-width: 991px; padding: 20px 15px 120px; }
 
@@ -143,8 +146,10 @@
 
 <body>
     <div class="header">
-        <div class="" onclick="history.back()"><i class=""></i></div>
-  Withdraw     Record
+        <a href="{{ route('user.profile.setting') }}" class="back-btn">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <span>Withdraw Record</span>
     </div>
     <div class="page">
         <div class="container">
