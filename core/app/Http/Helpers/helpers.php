@@ -48,7 +48,6 @@ function getNumber($length = 8)
     return $randomString;
 }
 
-
 function activeTemplate($asset = false)
 {
     $general = gs();
@@ -118,7 +117,6 @@ function showAmount($amount, $decimal = 2, $separate = true, $exceptZeros = fals
     return $printAmount;
 }
 
-
 function removeElement($array, $value)
 {
     return array_diff($array, (is_array($value) ? $value : array($value)));
@@ -129,24 +127,20 @@ function cryptoQR($wallet)
     return "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$wallet&choe=UTF-8";
 }
 
-
 function keyToTitle($text)
 {
     return ucfirst(preg_replace("/[^A-Za-z0-9 ]/", ' ', $text));
 }
-
 
 function titleToKey($text)
 {
     return strtolower(str_replace(' ', '_', $text));
 }
 
-
 function strLimit($title = null, $length = 10)
 {
     return Str::limit($title, $length);
 }
-
 
 function getIpInfo()
 {
@@ -154,13 +148,11 @@ function getIpInfo()
     return $ipInfo;
 }
 
-
 function osBrowser()
 {
     $osBrowser = ClientInfo::osBrowser();
     return $osBrowser;
 }
-
 
 function getTemplates()
 {
@@ -175,7 +167,6 @@ function getTemplates()
     }
 }
 
-
 function getPageSections($arr = false)
 {
     $jsonUrl = resource_path('views/') . str_replace('.', '/', activeTemplate()) . 'sections.json';
@@ -186,7 +177,6 @@ function getPageSections($arr = false)
     }
     return $sections;
 }
-
 
 function getImage($image, $size = null)
 {
@@ -199,7 +189,6 @@ function getImage($image, $size = null)
     }
     return asset('assets/images/default.png');
 }
-
 
 function notify($user, $templateName, $shortCodes = null, $sendVia = null, $createLog = true)
 {
@@ -235,7 +224,6 @@ function paginateLinks($data)
     return $data->appends(request()->all())->links();
 }
 
-
 function menuActive($routeName, $type = null, $param = null)
 {
     if ($type == 3) $class = 'side-menu--open';
@@ -254,7 +242,6 @@ function menuActive($routeName, $type = null, $param = null)
         return $class;
     }
 }
-
 
 function fileUploader($file, $location, $size = null, $old = null, $thumb = null)
 {
@@ -294,14 +281,12 @@ function diffForHumans($date)
     return Carbon::parse($date)->diffForHumans();
 }
 
-
 function showDateTime($date, $format = 'Y-m-d h:i A')
 {
     $lang = session()->get('lang');
     Carbon::setlocale($lang);
     return Carbon::parse($date)->translatedFormat($format);
 }
-
 
 function getContent($dataKeys, $singleQuery = false, $limit = null, $orderById = false)
 {
@@ -320,7 +305,6 @@ function getContent($dataKeys, $singleQuery = false, $limit = null, $orderById =
     }
     return $content;
 }
-
 
 function gatewayRedirectUrl($type = false)
 {
@@ -348,7 +332,6 @@ function verifyG2fa($user, $code, $secret = null)
     }
 }
 
-
 function urlPath($routeName, $routeParam = null)
 {
     if ($routeParam == null) {
@@ -361,7 +344,6 @@ function urlPath($routeName, $routeParam = null)
     return $path;
 }
 
-
 function showMobileNumber($number)
 {
     $length = strlen($number);
@@ -373,7 +355,6 @@ function showEmailAddress($email)
     $endPosition = strpos($email, '@') - 1;
     return substr_replace($email, '***', 1, $endPosition);
 }
-
 
 function getRealIP()
 {
@@ -404,12 +385,10 @@ function getRealIP()
     return $ip;
 }
 
-
 function appendQuery($key, $value)
 {
     return request()->fullUrlWithQuery([$key => $value]);
 }
-
 
 function dateSort($a, $b)
 {
@@ -460,14 +439,15 @@ function levelCommission($referee, $amount, $commissionType, $trx)
         }
 
         $com = ($amount * $commission->percent) / 100;
-        $referer->balance += $com;
-        $referer->save();
 
+        // ALL referral income goes to referral_bonus wallet (simplified system)
+        $referer->referral_bonus += $com;
+        $referer->save();
 
         $transactions[] = [
             'user_id' => $referer->id,
             'amount' => $com,
-            'post_balance' => $referer->balance,
+            'post_balance' => $referer->referral_bonus,
             'charge' => 0,
             'trx_type' => '+',
             'details' => ordinal($i) . ' level referral commission from ' . $referee->username,
@@ -489,7 +469,7 @@ function levelCommission($referee, $amount, $commissionType, $trx)
 
         notify($referer, 'REFERRAL_COMMISSION', [
             'amount' => showAmount($com),
-            'post_balance' => showAmount($referer->balance),
+            'post_balance' => showAmount($referer->referral_bonus),
             'trx' => $trx,
             'level' => ordinal($i),
             'type' => ucfirst(str_replace('_', ' ', $commissionType))
@@ -498,6 +478,7 @@ function levelCommission($referee, $amount, $commissionType, $trx)
         $tempReferee = $referer;
         $i++;
     }
+
     if (isset($transactions)) {
         Transaction::insert($transactions);
     }
@@ -505,7 +486,6 @@ function levelCommission($referee, $amount, $commissionType, $trx)
         CommissionLog::insert($commissionLog);
     }
 }
-
 
 function ordinal($number)
 {

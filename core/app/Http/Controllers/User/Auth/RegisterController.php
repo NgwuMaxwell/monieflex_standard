@@ -49,7 +49,6 @@ class RegisterController extends Controller
         return view($this->activeTemplate . 'user.auth.register', compact('pageTitle','mobileCode','countries'));
     }
 
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -73,10 +72,9 @@ class RegisterController extends Controller
         $countries = implode(',',array_column($countryData, 'country'));
         $validate = Validator::make($data, [
             'email' => 'required|string|email|unique:users',
-      
+
             'password' => ['required','confirmed',$passwordValidation],
-        
- 
+
         ]);
         return $validate;
 
@@ -99,7 +97,6 @@ class RegisterController extends Controller
             return back()->withNotify($notify);
         }
 
-
         $exist = User::where('mobile',$request->mobile_code.$request->mobile)->first();
         if ($exist) {
             $notify[] = ['error', 'The mobile number already exists'];
@@ -114,68 +111,71 @@ class RegisterController extends Controller
             ?: redirect($this->redirectPath());
     }
 
-
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array $data
      * @return \App\User
      */
-   protected function create(array $data)
-{
-    
-    function generateCode() {
-    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $code = '';
-    $max = strlen($characters) - 1;
+    protected function create(array $data)
+    {
+        function generateCode() {
+            $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $code = '';
+            $max = strlen($characters) - 1;
 
-    for ($i = 0; $i < 10; $i++) {
-        $code .= $characters[mt_rand(0, $max)];
-    }
+            for ($i = 0; $i < 10; $i++) {
+                $code .= $characters[mt_rand(0, $max)];
+            }
 
-    return $code;
-}
+            return $code;
+        }
 
-    $usernameCode = generateCode(); // Call the generateCode() function to generate a 10-digit alphanumeric code
+        $usernameCode = generateCode(); // Call the generateCode() function to generate a 10-digit alphanumeric code
 
-    $general = gs();
+        $general = gs();
 
-    $referBy = session()->get('ref');
-    if ($referBy) {
-        $referUser = User::where('ref', $referBy)->first();
-    } else {
+        // Handle referral code - check session first, then request data
+        $referBy = session()->get('ref');
+        if (!$referBy && isset($data['referral_code'])) {
+            $referBy = $data['referral_code'];
+        }
+
         $referUser = null;
-    }
-    // User Create
-    $user = new User();
-    $user->email = strtolower(trim($data['email']));
-    $user->password = Hash::make($data['password']);
+        if ($referBy) {
+            $referUser = User::where('ref', $referBy)->first();
+        }
 
-    $user->ref_by = $referUser ? $referUser->id : 0;
+        // User Create
+        $user = new User();
+        $user->email = strtolower(trim($data['email']));
+        $user->password = Hash::make($data['password']);
+        $user->ref_by = $referUser ? $referUser->id : 0;
 
+        $user->country_code = 'PK'; // Set default country code to PK
+        $user->status = 1;
+        $user->kv = $general->kv ? 0 : 1;
+        $user->ev = $general->ev ? 0 : 1;
+        $user->sv = $general->sv ? 0 : 1;
 
-    $user->country_code = 'PK'; // Set default country code to PK
-    $user->status = 1;
-    $user->kv = $general->kv ? 0 : 1;
-    $user->ev = $general->ev ? 0 : 1;
-    $user->sv = $general->sv ? 0 : 1;
-    $user->ref = $usernameCode;
-    $user->ts = 0;
-    $user->tv = 1;
-    
-    
-     // Add the additional user data
-    $user->reg_step = 1;
+        // Generate referral code based on user's email
+        $emailHash = md5(strtolower(trim($data['email'])));
+        $user->ref = substr($emailHash, 0, 10); // Use first 10 characters of email hash as referral code
 
-    // Save the user
-    $user->save();
-    
+        $user->ts = 0;
+        $user->tv = 1;
+
+        // Add the additional user data
+        $user->reg_step = 1;
+
+        // Save the user
+        $user->save();
+
         $adminNotification = new AdminNotification();
         $adminNotification->user_id = $user->id;
         $adminNotification->title = 'New member registered';
         $adminNotification->click_url = urlPath('admin.users.detail',$user->id);
         $adminNotification->save();
-
 
         //Login Log Create
         $ip = getRealIP();
@@ -206,12 +206,8 @@ class RegisterController extends Controller
         $userLogin->os = @$userAgent['os_platform'];
         $userLogin->save();
 
-
-    // Rest of the code...
-
-    return $user;
-}
-
+        return $user;
+    }
 
     public function checkUser(Request $request){
         $exist['data'] = false;
@@ -235,5 +231,4 @@ class RegisterController extends Controller
     {
         return to_route('user.home');
     }
-
 }

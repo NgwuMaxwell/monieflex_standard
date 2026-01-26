@@ -1,11 +1,6 @@
-                    
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-                    
-                    
-  
-<!-- Bootstrap -->
-<link rel="stylesheet" href="{{asset ('assets/pub/npm/bootstrap%404.5.3/dist/css/bootstrap.min.css')}}" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+                    <link rel="stylesheet" href="{{asset ('assets/pub/npm/bootstrap%404.5.3/dist/css/bootstrap.min.css')}}" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <link rel="stylesheet" href="{{asset ('assets/pub/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css')}}" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="{{asset ('assets/pub/npm/bootstrap-icons%401.9.1/font/bootstrap-icons.css')}}">
 <link rel="stylesheet" href="{{asset ('assets/pub/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css')}}" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -26,7 +21,7 @@
     .banner img { width: 60px; height: 60px; margin-top: -33px; }
 
     .form-block { width: 100%; height: 100%; background-color: #fff; border-radius: 25px 25px 0 0; padding: 25px 35px; position: relative; margin-top: -25px; }
-    
+
     .container { width: 100%; max-width: 991px; padding: 30px 20px; }
 
     form.login-form { margin: 0; }
@@ -37,7 +32,7 @@
     form.login-form input.form-control::placeholder { color: #bebebe; }
     form.login-form .input-group-append .input-group-text { background-color: transparent; padding: 0 10px; border: 0; height: 45px; }
     form.login-form button.btn.btn-get { width: fit-content; height: 30px; background: #571fb2; border: 0; border-radius: 18px; font-size: 12px; font-weight: 400; color: #fff; margin: 0px; padding: 0 10px; }
-    
+
     form.login-form button.btn.btn-submit { width: 100%; height: 45px; font-size: 16px; font-weight: 400; color: #fff; background: linear-gradient(90deg,#efcc00,#efcc00); border: 0px; border-radius: 25px; padding: 0; margin: 20px 0; }
     form.login-form button.btn.btn-submit.other { background: #3244a8; }
     form.login-form input.form-control:focus { box-shadow: none; }
@@ -67,7 +62,7 @@
 <style>
 
 #con1 { display: none;  align-items: center; justify-content: center;
-     
+
          position:absolute;
         max-width: 100%;
         height: auto;
@@ -76,25 +71,21 @@
         text-align: center;
         z-index: 999;
         transform: translate(-50%, -50%);
-         
-         
+
      }
-    .loaderClass1 { height: 42px; width: fit-content; 
+    .loaderClass1 { height: 42px; width: fit-content;
   padding: 0px 15px;
     background-color: rgba(0,0,0,1);
-    font-size: 15px; font-weight: 400; 
-    color: #ffffff; border-radius: 8px; 
+    font-size: 15px; font-weight: 400;
+    color: #ffffff; border-radius: 8px;
     display: flex; align-items: center; z-index: 9999;
-    
-         
-        
+
     }
 
 .loaderClass1 .animation { width: 20px; height: 20px; background: url('img/loading.gif')  no-repeat center center; background-size: 100% 100%; margin-right: 10px; }
-   
-  
-     #con { display: none;  align-items: center; justify-content: center;
-     
+
+   #con { display: none;  align-items: center; justify-content: center;
+
          position:absolute;
         max-width: 100%;
         height: auto;
@@ -103,26 +94,19 @@
         text-align: center;
         z-index: 999;
         transform: translate(-50%, -50%);
-         
-         
+
      }
-    .loaderClass { height: 42px; width: fit-content; 
+    .loaderClass { height: 42px; width: fit-content;
   padding: 0px 15px;
     background-color: rgba(0,0,0,1);
-    font-size: 15px; font-weight: 400; 
-    color: #ffffff; border-radius: 8px; 
+    font-size: 15px; font-weight: 400;
+    color: #ffffff; border-radius: 8px;
     display: flex; align-items: center; z-index: 9999;
-    
-         
-        
+
     }
-    
-    
-    
-    
+
     .loaderClass .animation { width: 20px; height: 20px; background: url('img/loading.gif')  no-repeat center center; background-size: 100% 100%; margin-right: 10px; }
-   
-   
+
  .custom-toast {
       position: fixed;
       top: 20px;
@@ -135,8 +119,7 @@
       z-index: 9999;
       display: none;
         text-align: center;
-      
-      
+
     }
     @media (max-width: 767px) {
       .custom-toast {
@@ -145,75 +128,49 @@
         transform: translate(-50%, -50%);
       }
     }
-    
+
     .custom-toast.show {
       display: block;
-     
-    }
 
+    }
 
 </style>
 
-
 </head>
 
-    
 <body>
-    
-    
+
      <div id="custom-toast" class="custom-toast">
       <div class="custom-toast-content">
-      
+
       </div>
     </div>
-    
-    
+
     <div class="header">
   Register
         <div class="left-arrow" onclick="window.location.href=''"><i class="bi bi-chevron-left"></i></div>
     </div>
-            
-              
-    
-    
+
     <div class="page">
         <div class="banner">
             <img      src="{{ asset('assets/images/logoIcon/logo.png') }}">
         </div>
-        
-             
-                    
-        
-        
-        
+
         <div class="form-block">
-    
-            
+
                                   <form                 action="{{ route('user.register') }}" method="post"
-                             
+
                 class="login-form">
-          @csrf 
-           
-                    
-                    
-                    
+          @csrf
+
                <div class="form-group">
                     <div class="input-group">
-                        
-                        
+
                         <div class="input-group-prepend">
                             <div class="input-group-text" style="width: fit-content;">Email ID<span id="contry-code"> </span></div>
                         </div>
-                        
-                        
-                        
+
                         <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter Email Address" required>
-                        
-                          
-                        
-                        
-                        
-                        
 
                     </div>
                 </div>
@@ -222,108 +179,61 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Password</div>
                         </div>
-                        
+
                          <input type="password" name="password" placeholder="@lang('Password')" class="form-control" required>
-                        
 
                     </div>
-                </div>     
-                
-                
-                
-                
-                
-                
-                
-                
-                                <div class="form-group">
+                </div>
+                <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">Re Pass</div>
                         </div>
-                        
-                        
-                          <input type="password" name="password_confirmation" placeholder="@lang('Re-type Password')" class="form-control" required>
-                        
-                        
-                        
 
-                        
+                          <input type="password" name="password_confirmation" placeholder="@lang('Re-type Password')" class="form-control" required>
 
                     </div>
-                </div> 
-                
-                                  
+                </div>
 
-@if (session()->get('ref') != null)
-    <?php
-    // Get the user's username from the session
-    $username = session()->get('ref');
-
-    // Search for the username in the users table
-    $user = App\Models\User::where('ref', $username)->first();
-
-    // Check if the user exists
-    if ($user) {
-        // Username exists
-        $message = "<center><p class='alert alert-success'><strong>{$user->username}</strong> has invited you to join <strong>Our Platform</strong></p></center>";
-    } else {
-        // Username does not exist
-        $message = "<center><p class='alert alert-danger'><strong>{$username}</strong> User not found.</p></center>";
-    }
-
-    // Display the message
-    echo $message;
-    ?>
-@endif
-                         @if (session()->get('ref') != null)
-                                       <div class="form-group">
+                <!-- Referral Code Input - Optional -->
+                <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <div class="input-group-text">  Sponser</div>
+                            <div class="input-group-text">Referral Code</div>
                         </div>
-                        
-                        
-
-                 
-               
-                        
-                        
-                        
-                        
-                         <input type="text" class="form-control" name="referBy" id="referenceBy" value="{{ session()->get('ref') }}" disabled>
-                        
-                        
-                        
-
-                        
-
+                        <input type="text" name="referral_code" class="form-control" placeholder="Enter referral code (optional)" value="{{ session()->get('ref') }}">
                     </div>
-                </div> 
-                
-                   @endif
-                
-                
-                
-                
-                
-                
-                
-                
-              
+                </div>
+
+                <!-- Show referral message if referral code is in session -->
+                @if (session()->get('ref') != null)
+                    <?php
+                    // Get the user's username from the session
+                    $username = session()->get('ref');
+
+                    // Search for the username in the users table
+                    $user = App\Models\User::where('ref', $username)->first();
+
+                    // Check if the user exists
+                    if ($user) {
+                        // Username exists
+                        $message = "<center><p class='alert alert-success'><strong>{$user->username}</strong> has invited you to join <strong>Our Platform</strong></p></center>";
+                    } else {
+                        // Username does not exist
+                        $message = "<center><p class='alert alert-danger'><strong>{$username}</strong> User not found.</p></center>";
+                    }
+
+                    // Display the message
+                    echo $message;
+                    ?>
+                @endif
+
                 <button class="btn btn-submit"  type="submit">Register</button>
-            
+
                 <button class="btn btn-submit other mt-0" type="button" onclick="window.location.href='{{route ('user.login')}}'">login</button>
-     
+
         </div>
-        
-        
-        
-                    
-        
 
-
-   
     <div class="container" id="con">
         <div class="loaderClass" id="loaderId">
             <div class="animation"></div>Loading
@@ -334,7 +244,7 @@
             display: none;
             align-items: center;
             justify-content: center;
-    
+
             position: absolute;
             max-width: 100%;
             height: auto;
@@ -342,10 +252,9 @@
             left: 50%;
             z-index: 999;
             transform: translate(-50%, -50%);
-    
-    
+
         }
-    
+
         .loaderClass {
             height: 46px;
             width: fit-content;
@@ -359,7 +268,7 @@
             align-items: center;
             z-index: 9999;
         }
-    
+
         .loaderClass .animation {
             width: 20px;
             height: 20px;
@@ -373,15 +282,6 @@
 </body>
 </html>
 
-           
-                    
   @include('partials.notify')
 
 </html>
-
-
-
-
-             
-     
-

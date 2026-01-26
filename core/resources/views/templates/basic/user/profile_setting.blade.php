@@ -219,8 +219,8 @@ $pageTitle = 'wallet';
                         <p>{{ $formattedPtcEarn }}<span>{{ $general->cur_text }}</span></p>
                     </div>
                     <div class="part-two">
-                        <h6>Approve Withdraw</h6>
-                        <p>{{ $withdrawalAmount }}<span>{{ $general->cur_text }}</span></p>
+                        <h6>Referral Bonus</h6>
+                        <p>{{ number_format($user->referral_bonus, 2) }}<span>{{ $general->cur_text }}</span></p>
                     </div>
                 </div>
                 <hr></hr>

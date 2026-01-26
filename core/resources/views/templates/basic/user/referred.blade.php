@@ -1,7 +1,4 @@
-
-
-
-  <title> {{ $general->siteName(__($pageTitle)) }}</title>
+<title> {{ $general->siteName(__($pageTitle)) }}</title>
     @include('partials.seo')
 
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,8 +19,6 @@
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/main.css') }}">
 
     <link rel="stylesheet" href="{{ asset($activeTemplateTrue . 'css/custom.css') }}">
-
-
 
     <style>
         @import  url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
@@ -137,7 +132,7 @@
             max-width: 991px;
             height: 50px;
             background-color: #fff;
-            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            border-top: 1px solid rgba( 0, 0, 0, 0.15);
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -177,7 +172,6 @@
             filter: grayscale(0%);
             opacity: 1;
         }
-
 
         .tab-content .content-block {
             width: 100%;
@@ -228,6 +222,55 @@
             text-align: center;
             margin: 25px auto;
         }
+
+        /* Referral link section styles */
+        .referral-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .referral-section h4 {
+            color: #3172f5;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .referral-section p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .referral-link-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .referral-link-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .referral-link-input button {
+            padding: 10px 15px;
+            background-color: #3172f5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .referral-link-input button:hover {
+            background-color: #2a5bb9;
+        }
     </style>
 
 </head>
@@ -239,45 +282,25 @@
   $userCount = App\Models\User::where('ref_by', $authUser->id)->count();
 @endphp
 
-
-
-
-
-
-
-
-
 <h1>‎ ‎ ‎ ‎ ‎ ‎  ‎ </h1>
 
 <div class="container">
         <div class="row">
-            <!-- Code Start -->
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-body">
-                            
+            <!-- Referral Link Section -->
+            <div class="referral-section">
+                <h4>Your Unique Referral Link</h4>
+                <p>Share this link with friends to earn referral commissions</p>
 
-                            
-                            
-                            
-                            
-                            <div class="row">
-                                <div class="col-lg-12 order-lg-1">
-                                    <h4 class="mb-3"></h4><br/>
-                                    <div class="mb-3">
-                                        <label for="address" class="form-label">Referral Link</label>
-                                        <input type="text" value="{{ route('home') }}/ref/{{ $user->ref }}" class="form-control" id="myInput">
-                                    </div>
-                                    <hr class="mb-4">
-                                    <button class="btn btn-primary btn-lg btn-block" type="button" onclick="myFunction()">Copy My Referral Link</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="referral-link-input">
+                    <input type="text" value="{{ route('home') }}/ref/{{ $authUser->ref }}" class="form-control" id="myInput" readonly>
+                    <button class="btn btn-primary" type="button" onclick="myFunction()">Copy Link</button>
                 </div>
+
+                <p style="font-size: 12px; color: #888; margin-top: 10px;">
+                    Your referral code: <strong>{{ $authUser->ref }}</strong>
+                </p>
             </div>
-   
+
     <div class="header">
         <a href="{{ route('user.profile.setting') }}" class="back-btn">
             <i class="fas fa-arrow-left"></i>
@@ -323,15 +346,6 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
@@ -342,18 +356,18 @@
                             <table class="table table-striped table-responsive-sm">
                                 <thead>
                                     <tr>
-                         
+
                                         <th>@lang('Email')</th>
-                                   
+
                                         <th>@lang('Plan')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse($refUsers as $log)
                                     <tr>
-                          
+
                                         <td data-label="@lang('Email')">{{ $log->email }}</td>
-                             
+
                                         <td data-label="@lang('Plan')">{{ __($log->plan ? $log->plan->name : "No Plan") }}</td>
                                     </tr>
                                     @empty

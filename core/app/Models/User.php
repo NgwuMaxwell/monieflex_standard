@@ -27,7 +27,8 @@ class User extends Authenticatable
         'address' => 'object',
         'kyc_data' => 'object',
         'ver_code_send_at' => 'datetime',
-        'profit_wallet' => 'decimal:2'
+        'profit_wallet' => 'decimal:2',
+        'referral_bonus' => 'decimal:2'
     ];
 
 
@@ -70,7 +71,6 @@ class User extends Authenticatable
         );
     }
 
-
     public function plan()
     {
         return $this->belongsTo(Plan::class);
@@ -85,7 +85,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(CommissionLog::class);
     }
-
 
     public function refBy()
     {
