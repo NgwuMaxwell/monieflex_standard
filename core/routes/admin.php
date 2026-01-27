@@ -314,7 +314,7 @@ Route::middleware('admin')->group(function () {
     // Blog Management
 Route::name('blog.')->prefix('blog')->controller('BlogManagementController')->group(function () {
     Route::get('all-posts', 'allPosts')->name('all');
-    Route::get('delete/{id}', 'deletePost')->name('delete');
+    Route::delete('delete/{id}', 'deletePost')->name('delete');
     Route::get('comments', 'comments')->name('comments');
     Route::get('comment/delete/{id}', 'deleteComment')->name('comment.delete');
 });
