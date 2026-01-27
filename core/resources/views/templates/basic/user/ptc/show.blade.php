@@ -160,17 +160,10 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <form action="" id="confirm-form" method="post">
+                    <form action="{{ route('user.ptc.confirm', encrypt($ptc->id . '|' . auth()->user()->id)) }}" id="confirm-form" method="post">
                         @csrf
                         <ul class="nav navbar-nav text-end mt-md-0 mt-2">
                             <li class="active">
-                                <span id="inputcaptchahidden" class="d-none">
-                                    <input id="cap_number_1" name="first_number" class="inputcaptcha" value="{{ rand(0, 9) }}" type="text" readonly>
-                                    <label for="exampleInputEmail2 text-white"> + </label>
-                                    <input id="cap_number_2" name="second_number" class="inputcaptcha" value="{{ rand(0, 9) }}" type="text" readonly>
-                                    <label for="exampleInputEmail2 text-white">=</label>
-                                    <input type="number" name="result" class="inputcaptcha" id="cap_result" required>&nbsp;
-                                </span>
                                 <button type="button" id="confirm" class="btn btn-danger btn-md mt-sm-0 mt-2" disabled>
                                     @lang('Loading Task')
                                 </button>
@@ -197,9 +190,6 @@
                         confirmButton.innerHTML = "Complete Task";
                         confirmButton.removeAttribute('disabled');
                         confirmButton.setAttribute('type', 'submit');
-                        document.getElementById('confirm-form').setAttribute('action', '{{ route('user.ptc.confirm', encrypt($ptc->id . '|' . auth()->user()->id)) }}');
-                        var captchaInputHidden = document.getElementById("inputcaptchahidden");
-                        captchaInputHidden.classList.remove("d-none");
                         clearInterval(id);
                     } else {
                         width++;
