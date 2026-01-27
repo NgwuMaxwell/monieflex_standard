@@ -22,7 +22,11 @@
                                     <td>
                                         <div class="user">
                                             <div class="thumb">
-                                                <img src="{{ getImage('assets/images/frontend/blog/'.$blog->data_values->image, '400x200') }}" alt="@lang('image')">
+                                                @if($blog->data_values && isset($blog->data_values->image))
+                                                    <img src="{{ getImage('assets/images/frontend/blog/'.$blog->data_values->image, '400x200') }}" alt="@lang('image')">
+                                                @else
+                                                    <span class="text-muted">@lang('No image')</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>
