@@ -216,7 +216,7 @@ class ManageUsersController extends Controller
         $request->validate([
             'amount' => 'required|numeric|gt:0',
             'act' => 'required|in:add,sub',
-            'wallet_type' => 'required|in:balance,profit_wallet',
+            'wallet_type' => 'required|in:balance,profit_wallet,referral_wallet',
             'remark' => 'required|string|max:255',
         ]);
 
@@ -227,7 +227,7 @@ class ManageUsersController extends Controller
         $trx = getTrx();
 
         $transaction = new Transaction();
-        $walletName = $walletType === 'balance' ? 'Wallet Balance' : 'Profit Wallet';
+        $walletName = $walletType === 'balance' ? 'Wallet Balance' : ($walletType === 'profit_wallet' ? 'Profit Wallet' : 'Referral Wallet');
 
         if ($request->act == 'add') {
             $user->{$walletType} += $amount;

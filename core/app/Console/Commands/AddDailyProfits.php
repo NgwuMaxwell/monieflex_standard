@@ -110,6 +110,14 @@ class AddDailyProfits extends Command
             if ($profitDay == $user->plan->validity && $user->plan->return_capital) {
                 $user->profit_wallet += $user->plan->price;
                 $this->info("Returned capital of {$user->plan->price} to user {$user->id} for completing plan");
+                
+                // Create a special profit record for the capital return
+                PlanProfit::create([
+                    'user_id' => $user->id,
+                    'plan_id' => $user->plan_id,
+                    'daily_profit' => $user->plan->price,
+                    'profit_date' => $profitEarnedDate,
+                ]);
             }
 
             $user->save();

@@ -417,7 +417,7 @@ class UserController extends Controller
             $profits = \App\Models\PlanProfit::where('user_id', $user->id)
                 ->where('plan_id', $planId)
                 ->where('profit_date', '>=', $subscriptionDate->toDateString())
-                ->orderBy('profit_date', 'desc')
+                ->orderBy('profit_date', 'asc') // Changed to ascending for proper day numbering
                 ->get();
         }
 
@@ -426,18 +426,16 @@ class UserController extends Controller
         $totalExpectedProfits = ($plan->price * $plan->roi_percentage) / 100;
         $remainingProfits = $totalExpectedProfits - $totalProfitsAdded;
 
-        // Calculate days elapsed more accurately - based on time since purchase
-        $purchaseDate = \App\Models\Transaction::where('user_id', $user->id)
-            ->where('remark', 'subscribe_plan')
-            ->where('details', 'like', '%'.$plan->name.'%')
-            ->orderBy('created_at', 'desc')
-            ->first();
+        // Calculate days elapsed based on actual profits added (not time-based)
+        // This gives us the actual number of profit days that have been processed
+        $daysElapsed = $profits->count();
 
-        $daysElapsed = 0;
-        if ($purchaseDate) {
-            $hoursSincePurchase = $purchaseDate->created_at->diffInHours(now());
+        // However, we also need to calculate potential days based on time for display purposes
+        $potentialDaysElapsed = 0;
+        if ($latestSubscription) {
+            $hoursSincePurchase = $latestSubscription->created_at->diffInHours(now());
             $potentialDaysElapsed = floor($hoursSincePurchase / 24);
-            $daysElapsed = min($potentialDaysElapsed, $plan->validity);
+            $potentialDaysElapsed = min($potentialDaysElapsed, $plan->validity);
         }
 
         $totalDays = $plan->validity;
@@ -458,9 +456,11 @@ class UserController extends Controller
             'totalExpectedProfits',
             'remainingProfits',
             'daysElapsed',
+            'potentialDaysElapsed',
             'totalDays',
             'remainingDays',
-            'isActive'
+            'isActive',
+            'expectedDailyProfit'
         ));
     }
 

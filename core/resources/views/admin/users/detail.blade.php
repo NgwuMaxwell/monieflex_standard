@@ -103,6 +103,14 @@
                 @endif
 
                 <div class="flex-fill">
+                    @if($user->plan_id)
+                    <a href="{{ route('admin.plan.subscription.progress', [$user->id, $user->plan_id]) }}" class="btn btn--info btn--shadow w-100 btn-lg">
+                        <i class="las la-chart-line"></i>@lang('View Plan Progress')
+                    </a>
+                    @endif
+                </div>
+
+                <div class="flex-fill">
                     @if($user->status == 1)
                     <button type="button" class="btn btn--warning btn--gradi btn--shadow w-100 btn-lg userStatus" data-bs-toggle="modal" data-bs-target="#userStatusModal">
                         <i class="las la-ban"></i>@lang('Ban User')
@@ -267,6 +275,7 @@
                             <select name="wallet_type" class="form-control" required>
                                 <option value="balance">@lang('Wallet Balance')</option>
                                 <option value="profit_wallet">@lang('Profit Wallet')</option>
+                                <option value="referral_wallet">@lang('Referral Wallet')</option>
                             </select>
                         </div>
                         <div class="form-group">
