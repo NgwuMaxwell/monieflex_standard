@@ -124,7 +124,7 @@
                     <a class="nav-link active" id="nav-one-tab" data-toggle="tab" href="#nav-one" role="tab" aria-controls="nav-one" aria-selected="true">Cash Withdraw</a>
                                        
                 </div>
-            </nav> <a class="nav-link active" >The Minimum Withdraw is {{ $withdrawMethod->first()->min_limit ?? 100 }} {{__($general->cur_text)}}  </a>
+            </nav> <a class="nav-link active" id="min-withdraw-display">The Minimum Withdraw is <span id="min-withdraw-amount">{{ $withdrawMethod->first()->min_limit ?? 100 }}</span> {{__($general->cur_text)}}  </a>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-one" role="tabpanel" aria-labelledby="nav-one-tab">
                     <form class="login-form" action="{{ route('user.withdraw.money') }}" method="post">
@@ -324,7 +324,24 @@
 <script type="text/javascript">
     (function ($) {
             "use strict";
+            
+            // Function to update minimum withdrawal amount display
+            function updateMinWithdrawAmount() {
+                var selectedMethod = $('select[name=method_code] option:selected');
+                if (selectedMethod.length > 0) {
+                    var resource = selectedMethod.data('resource');
+                    if (resource && resource.min_limit) {
+                        $('#min-withdraw-amount').text(parseFloat(resource.min_limit).toFixed(2));
+                    } else {
+                        $('#min-withdraw-amount').text('100');
+                    }
+                }
+            }
+            
             $('select[name=method_code]').change(function(){
+                // Update minimum withdrawal amount when method changes
+                updateMinWithdrawAmount();
+                
                 if(!$('select[name=method_code]').val()){
                     $('.preview-details').addClass('d-none');
                     return false;
@@ -370,6 +387,10 @@
                 $('.method_currency').text(resource.currency);
                 $('input[name=amount]').on('input');
             });
+            
+            // Initialize minimum withdrawal amount on page load
+            updateMinWithdrawAmount();
+            
             $('input[name=amount]').on('input',function(){
                 var data = $('select[name=method_code]').change();
                 $('.amount').text(parseFloat($(this).val()).toFixed(2));
