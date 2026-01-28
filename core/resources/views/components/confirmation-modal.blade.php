@@ -9,7 +9,6 @@
             </div>
             <form action="" method="POST">
                 @csrf
-                @method('DELETE')
                 <div class="modal-body">
                     <p class="question"></p>
                 </div>
@@ -32,6 +31,19 @@
             let data    = $(this).data();
             modal.find('.question').text(`${data.question}`);
             modal.find('form').attr('action', `${data.action}`);
+            
+            // Remove any existing method input
+            modal.find('input[name="_method"]').remove();
+            
+            // Add method input based on the action URL
+            let action = data.action;
+            if (action.includes('/delete/') || action.includes('/reject/')) {
+                modal.find('form').append('<input type="hidden" name="_method" value="DELETE">');
+            } else {
+                // For approve actions and others, use POST
+                modal.find('form').append('<input type="hidden" name="_method" value="POST">');
+            }
+            
             modal.modal('show');
         });
     })(jQuery);
